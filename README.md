@@ -40,3 +40,18 @@ Prefix can be defined via an option.
 ## Mail Templates
 
 * User Registration Mail
+
+
+## Configuration
+
+| Setting | Description | Example | Default |
+| ---- | ---- | ----| ---- |
+| `spring.kafka.bootstrap-servers` | Endpoint(s) of the Kafka broker(s) to connect to | `localhost:9092` | `localhost:9092` |
+| `spring.kafka.consumer.group-id` | Consumer group id used when reading from Kafka | `hackflux-m365-integration` | `hackflux-m365-integration` |
+| `hackflux.kafka.topic` | Kafka topic to consume Hack.flux events from | `hackflux-events` | - |
+
+## Dev Start
+
+````
+./gradlew bootRun
+````

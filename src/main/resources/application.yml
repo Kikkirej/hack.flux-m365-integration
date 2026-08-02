@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: hack.flux-m365-integration
+  config:
+    import: "optional:configserver:"
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: hackflux-m365-integration
+
+hackflux:
+  kafka:
+    topic: hackflux-events

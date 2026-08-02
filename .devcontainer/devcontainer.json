@@ -1,0 +1,35 @@
+{
+  "name": "HackFlux M365 Integration",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "25",
+      "jdkDistro": "tem",
+      "installGradle": "true",
+      "gradleVersion": "9.5.1"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "fwcd.kotlin",
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-spring-boot",
+        "vscjava.vscode-spring-boot-dashboard",
+        "vscjava.vscode-gradle",
+        "ms-azuretools.vscode-containers",
+        "anthropic.claude-code"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "java.configuration.updateBuildConfiguration": "automatic"
+      }
+    }
+  },
+  "forwardPorts": [
+    8080
+  ],
+  "postCreateCommand": "./gradlew dependencies --quiet",
+  "remoteUser": "vscode"
+}

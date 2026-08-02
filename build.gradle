@@ -1,0 +1,55 @@
+plugins {
+	id 'org.jetbrains.kotlin.jvm' version '2.3.21'
+	id 'org.jetbrains.kotlin.plugin.spring' version '2.3.21'
+	id 'org.springframework.boot' version '4.1.0'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'net.kikkirej.hack.flux'
+version = '1.2.0-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springBootAdminVersion', "4.1.2")
+	set('springCloudVersion', "2025.1.2")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-kafka'
+	implementation 'de.codecentric:spring-boot-admin-starter-client'
+	implementation 'org.apache.kafka:kafka-streams'
+	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+	testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
+	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+	testImplementation 'io.mockk:mockk:1.14.3'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+kotlin {
+	compilerOptions {
+		freeCompilerArgs.addAll '-Xjsr305=strict', '-Xannotation-default-target=param-property'
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
